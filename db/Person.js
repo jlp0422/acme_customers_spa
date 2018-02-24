@@ -1,7 +1,7 @@
 const conn = require('./conn');
 const { Sequelize } = conn;
 
-const Person = conn.define('person', {
+const Customer = conn.define('customer', {
   name: {
     type: Sequelize.STRING
   },
@@ -10,4 +10,4 @@ const Person = conn.define('person', {
   }
 });
 
-module.exports = Person
+module.exports = Customer

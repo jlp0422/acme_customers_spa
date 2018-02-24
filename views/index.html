@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> SPA Day </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="./vendor/bootstrap/dist/css/bootstrap.css" />
+  <script src="./vendor/app.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Acme Customers SPA</h1>
+    <form action="/api/customers" method="POST">
+    <!-- <form> -->
+      <input type="email" name="email" id="email" />
+      <button id="createButton">Create</button>
+    </form>
+    <div id="message">
+    </div>
+    <ul id="customerList">
+    </ul>
+  </div>
+</body>
+</html>
