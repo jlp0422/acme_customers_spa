@@ -5,7 +5,7 @@ const formButton = document.getElementById('createButton')
 const emailInput = document.getElementById('email')
 const customerList = document.getElementById('customerList')
 const message = document.getElementById('message')
-const newMessage = document.createElement('p')
+const newMessage = document.createElement('h4')
 
 const emails = []
 
@@ -15,13 +15,14 @@ fetch('/api')
     data.forEach(person => {
       // creating person list item
       const newPerson = document.createElement('li')
-      newPerson.style = 'margin:15px 0px';
+      newPerson.style = 'margin:10px 0px';
+      newPerson.className = 'list-group-item'
       newPerson.innerText = person.email
       newPerson.id = person.id
       // creating remove button
       const removeButton = document.createElement('button')
       removeButton.innerText = 'Remove'
-      removeButton.className = 'btn btn-danger'
+      removeButton.className = 'btn btn-outline-danger'
       removeButton.style = 'margin-left:10px;'
       customerList.appendChild(newPerson)
       newPerson.appendChild(removeButton)
@@ -57,17 +58,19 @@ formButton.addEventListener('click', () => {
     // checking to see if email already exists
     if (emails.includes(customer.email)) {
       newMessage.innerText = 'Emails must be unique!'
+      emailInput.value = ''
       return;
     }
     // creating new person list item
     const newPerson = document.createElement('li')
-    newPerson.style = 'margin:15px 0px';
+    newPerson.style = 'margin:10px 0px';
+    newPerson.className = 'list-group-item'
     newPerson.innerText = customer.email
     newPerson.id = customer.id
     // creating remove button
     const removeButton = document.createElement('button')
     removeButton.innerText = 'Remove'
-    removeButton.className = 'btn btn-danger'
+    removeButton.className = 'btn btn-outline-danger'
     removeButton.style = 'margin-left:10px;'
     customerList.appendChild(newPerson)
     newPerson.appendChild(removeButton)

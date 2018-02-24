@@ -11,14 +11,15 @@
 <body>
   <div class="container">
     <h1>Acme Customers SPA</h1>
-    <!-- <form action="/api/customers" method="POST"> -->
-    <!-- <form> -->
-      <input type="email" name="email" id="email" />
-      <button class="btn btn-outline-success" id="createButton">Create</button>
-    <!-- </form> -->
+    <div class="input-group mb-3">
+      <input type="email" class="form-control col-4" placeholder="Customer email" aria-label="Recipient's username" aria-describedby="basic-addon2" name="email" id="email">
+      <div class="input-group-append">
+        <button class="btn btn-success" id="createButton" type="button">Create</button>
+      </div>
+    </div>
     <div id="message">
     </div>
-    <ul id="customerList">
+    <ul class="list-group" id="customerList">
     </ul>
   </div>
 </body>

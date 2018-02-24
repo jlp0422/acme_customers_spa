@@ -37,9 +37,19 @@ app.get('/api/customers', (req, res, next) => {
 
 // post /api/customers - creates a customer and returns it
 app.post('/api/customers', (req, res, next) => {
-  Customer.create(req.body)
-    .then(customer => res.json(customer))
-    .catch(next)
+  // Customer.findOne({
+  //   where:{ email: req.body.email }
+  // })
+  //   .then(customer => {
+  //     console.log(customer)
+  //     if (customer !== null) return;
+  //   })
+  //   .then(() => {
+      Customer.create(req.body)
+        .then(customer => res.json(customer))
+        .catch(next)
+    // })
+    // .catch(next)
 })
 
 // delete /api/customers/:id - deletes customer
@@ -51,7 +61,6 @@ app.delete('/api/customers/:id', (req, res ,next) => {
     })
     .catch(next)
 })
-
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`port of call: ${port}`));
