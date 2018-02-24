@@ -24,18 +24,21 @@ fetch('/api')
 // adding new person to list
 formButton.addEventListener('click', () => {
   fetch('/api/customers', {
-    method: 'POST',
-  })
-    .then(result => {
-      console.log(result)
-      result.json()})
-    .then(data => {
-      console.log(data)
-
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'post',
+    body: JSON.stringify({
+      email: emailInput.value
     })
-    .catch(console.error)
-  const newPerson = document.createElement('li')
-  newPerson.innerText = emailInput.value
-  document.getElementById('customerList').appendChild(newPerson)
+  })
+  .then(result => result.json())
+  .then(data => {
+    const newPerson = document.createElement('li')
+    newPerson.innerText = data.email
+    document.getElementById('customerList').appendChild(newPerson)
+    emailInput.value = ''
+  })
+  .catch(console.error)
 })
 

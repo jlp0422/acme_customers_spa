@@ -11,7 +11,6 @@ app.use('/vendor', express.static(path.join(__dirname, 'client')))
 app.use(require('body-parser').json())
 app.use(require('body-parser').urlencoded({ extended:false }));
 
-
 app.use((req, res, next) => {
   res.locals.path = req.url
   next()
