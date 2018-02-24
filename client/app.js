@@ -1,6 +1,9 @@
 /* eslint-disable */
 // javascript and dom selection
 
+const formButton = document.getElementById('createButton')
+const emailInput = document.getElementById('email')
+
 fetch('/api')
   .then(result => result.json())
   .then(data => {
@@ -18,19 +21,21 @@ fetch('/api')
   })
   .catch(console.error)
 
-// fetch('/api/customers', {
-//   method: POST
-// })
-//   .then(result => result.json())
-//   .then(data => console.log(data))
-//   .catch(console.error)
-
-const formButton = document.getElementById('createButton')
-const emailInput = document.getElementById('email')
-
 // adding new person to list
 formButton.addEventListener('click', () => {
+  fetch('/api/customers', {
+    method: 'POST',
+  })
+    .then(result => {
+      console.log(result)
+      result.json()})
+    .then(data => {
+      console.log(data)
+
+    })
+    .catch(console.error)
   const newPerson = document.createElement('li')
   newPerson.innerText = emailInput.value
   document.getElementById('customerList').appendChild(newPerson)
 })
+

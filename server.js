@@ -37,15 +37,14 @@ app.get('/api/customers', (req, res, next) => {
 
 // post /api/customers - creates a customer and returns it
 app.post('/api/customers', (req, res, next) => {
+  console.log(req.body)
   Customer.create(req.body)
-    .then(customer => {
-      return customer;
-    })
+    .then(customer => res.json(customer))
     .catch(next)
 })
 
-
 // delete /api/customers/:id - deletes custoer
+
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`port of call: ${port}`));
