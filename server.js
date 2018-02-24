@@ -10,6 +10,7 @@ app.use('/vendor', express.static(path.join(__dirname, 'client')))
 
 app.use(require('body-parser').json())
 app.use(require('body-parser').urlencoded({ extended:false }));
+app.use(require('method-override')('_method'))
 
 app.use((req, res, next) => {
   res.locals.path = req.url
@@ -36,13 +37,20 @@ app.get('/api/customers', (req, res, next) => {
 
 // post /api/customers - creates a customer and returns it
 app.post('/api/customers', (req, res, next) => {
-  console.log(req.body)
   Customer.create(req.body)
     .then(customer => res.json(customer))
     .catch(next)
 })
 
-// delete /api/customers/:id - deletes custoer
+// delete /api/customers/:id - deletes customer
+app.delete('/api/customers/:id', (req, res ,next) => {
+  Customer.findById(req.params.id)
+    .then(customer => {
+      res.json(customer)
+      customer.destroy()
+    })
+    .catch(next)
+})
 
 
 const port = process.env.PORT || 3000;
