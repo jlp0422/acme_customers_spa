@@ -37,7 +37,10 @@ const deleteCustomer = (customer) => {
 }
 
 const checkForError = (response) => {
-  if (!response.ok) console.log('check4error', response)
+  if (!response.ok) {
+    return response.json()
+      .then(err => console.log(err))
+  }
   return response
 }
 
@@ -47,7 +50,7 @@ fetch('/api/customers')
   .then(result => result.json())
   .then(data => data.forEach(customer => createCustomer(customer)))
   .then(() => newMessage.innerText = 'Create a person!')
-  .catch(error => console.log('fetch', error))
+  .catch(console.error)
 
 // adding new customer to list
 formButton.addEventListener('click', () => {
@@ -59,5 +62,5 @@ formButton.addEventListener('click', () => {
   .then(response => checkForError(response))
   .then(result => result.json())
   .then(customer => createCustomer(customer))
-  .catch(error => console.log('posting', error))
+  .catch(error => console.log(error))
 })

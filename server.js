@@ -18,8 +18,7 @@ app.use((req, res, next) => {
 })
 
 app.use((err, req, res, next) => {
-  res.json(err)
-  next()
+  res.status(err.status || 500).send({ error: err });
 })
 
 // serves page
@@ -30,7 +29,7 @@ app.get('/', (req, res, next) => {
 // get /api/customers - gets all customers
 app.get('/api/customers', (req, res, next) => {
   Customer.findAll()
-    .then(customers => res.send(customers))
+    .then(customers => res.json(customers))
     .catch(next)
 })
 
@@ -38,7 +37,7 @@ app.get('/api/customers', (req, res, next) => {
 app.post('/api/customers', (req, res, next) => {
   Customer.create(req.body)
     .then(customer => res.json(customer))
-    .catch(next)
+    .catch(error => next(error.errors[0].message))
 })
 
 // delete /api/customers/:id - deletes customer
