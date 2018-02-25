@@ -9,7 +9,7 @@ const newMessage = document.createElement('h4')
 
 const emails = []
 
-fetch('/api')
+fetch('/api/customers')
   .then(result => result.json())
   .then(data => {
     data.forEach(person => {
@@ -35,6 +35,8 @@ fetch('/api')
           method: 'delete',
           body: JSON.stringify({ id: `${newPerson.id}` })
         })
+        personIndex = emails.indexOf(newPerson.innerHTML.split('<')[0])
+        emails.splice(personIndex, 1)
         newPerson.remove()
       })
 
@@ -85,7 +87,10 @@ formButton.addEventListener('click', () => {
         method: 'delete',
         body: JSON.stringify({ id: `${newPerson.id}` })
       })
+      personIndex = emails.indexOf(newPerson.innerHTML.split('<')[0])
+      emails.splice(personIndex, 1)
       newPerson.remove()
+
     })
 
   })

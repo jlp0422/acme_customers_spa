@@ -22,12 +22,6 @@ app.get('/', (req, res, next) => {
   res.sendFile(path.join(__dirname, './views/index.html'))
 })
 
-app.get('/api', (req, res, next) => {
-  Customer.findAll()
-    .then(customers => res.send(customers))
-    .catch(next)
-})
-
 // get /api/customers - gets all customers
 app.get('/api/customers', (req, res, next) => {
   Customer.findAll()
@@ -56,8 +50,8 @@ app.post('/api/customers', (req, res, next) => {
 app.delete('/api/customers/:id', (req, res ,next) => {
   Customer.findById(req.params.id)
     .then(customer => {
-      res.json(customer)
       customer.destroy()
+      res.json(customer)
     })
     .catch(next)
 })
