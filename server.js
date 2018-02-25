@@ -17,6 +17,11 @@ app.use((req, res, next) => {
   next()
 })
 
+app.use((err, req, res, next) => {
+  res.json(err)
+  next()
+})
+
 // serves page
 app.get('/', (req, res, next) => {
   res.sendFile(path.join(__dirname, './views/index.html'))
@@ -31,19 +36,9 @@ app.get('/api/customers', (req, res, next) => {
 
 // post /api/customers - creates a customer and returns it
 app.post('/api/customers', (req, res, next) => {
-  // Customer.findOne({
-  //   where:{ email: req.body.email }
-  // })
-  //   .then(customer => {
-  //     console.log(customer)
-  //     if (customer !== null) return;
-  //   })
-  //   .then(() => {
-      Customer.create(req.body)
-        .then(customer => res.json(customer))
-        .catch(next)
-    // })
-    // .catch(next)
+  Customer.create(req.body)
+    .then(customer => res.json(customer))
+    .catch(next)
 })
 
 // delete /api/customers/:id - deletes customer

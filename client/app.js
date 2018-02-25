@@ -57,12 +57,6 @@ formButton.addEventListener('click', () => {
   })
   .then(result => result.json())
   .then(customer => {
-    // checking to see if email already exists
-    if (emails.includes(customer.email)) {
-      newMessage.innerText = 'Emails must be unique!'
-      emailInput.value = ''
-      return;
-    }
     // creating new person list item
     const newPerson = document.createElement('li')
     newPerson.style = 'margin:10px 0px';
