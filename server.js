@@ -37,7 +37,7 @@ app.get('/api/customers', (req, res, next) => {
 app.post('/api/customers', (req, res, next) => {
   Customer.create(req.body)
     .then(customer => res.json(customer))
-    .catch(error => next(error.errors[0].message))
+    .catch(next)
 })
 
 // delete /api/customers/:id - deletes customer

@@ -39,7 +39,7 @@ const deleteCustomer = (customer) => {
 const checkForError = (response) => {
   if (!response.ok) {
     return response.json()
-      .then(err => console.log(err))
+      .then(err => console.log('error', err))
   }
   return response
 }
