@@ -40,7 +40,7 @@ const checkForError = (response) => {
     return response.json()
       .then(res => {
         console.log(res.err.errors[0])
-        newMessage.innerText = res.err.errors[0].message
+        newMessage.innerText = `${res.err.errors[0].type}: ${res.err.errors[0].message}`
         throw Error(response.error)
         return;
       })
