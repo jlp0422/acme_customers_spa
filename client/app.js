@@ -32,25 +32,24 @@ const deleteCustomer = (customer) => {
   fetch(`/api/customers/${customer.id}`, {
     headers: { 'Content-Type': 'application/json' },
     method: 'delete',
-    body: JSON.stringify({ id: `${customer.id}` })
   })
 }
 
 const checkForError = (response) => {
   if (!response.ok) {
-    return response.json()
-      .then(err => console.log('error', err))
+    newMessage.innerText = 'Please try again. All emails must be valid and unique.'
+    emailInput.value = ''
   }
   return response
 }
 
 // fetching all customers
 fetch('/api/customers')
-  .then(response => checkForError(response))
+  .then(checkForError)
   .then(result => result.json())
   .then(data => data.forEach(customer => createCustomer(customer)))
   .then(() => newMessage.innerText = 'Create a person!')
-  .catch(console.error)
+  .catch(console.log())
 
 // adding new customer to list
 formButton.addEventListener('click', () => {
@@ -62,5 +61,5 @@ formButton.addEventListener('click', () => {
   .then(response => checkForError(response))
   .then(result => result.json())
   .then(customer => createCustomer(customer))
-  .catch(error => console.log(error))
+  .catch(error => console.log('posting\n', error))
 })

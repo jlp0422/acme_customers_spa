@@ -5,12 +5,12 @@ const path = require('path');
 const db = require ('./db');
 const { Customer } = db.models;
 
-app.use('/vendor', express.static(path.join(__dirname, 'node_modules')))
 app.use('/vendor', express.static(path.join(__dirname, 'client')))
+app.use('/vendor', express.static(path.join(__dirname, 'node_modules')))
 
-app.use(require('body-parser').json())
-app.use(require('body-parser').urlencoded({ extended:false }));
-app.use(require('method-override')('_method'))
+app.use(require('body-parser').json());
+app.use(require('body-parser').urlencoded({ extended: false }));
+app.use(require('method-override')('_method'));
 
 app.use((req, res, next) => {
   res.locals.path = req.url
@@ -18,7 +18,7 @@ app.use((req, res, next) => {
 })
 
 app.use((err, req, res, next) => {
-  res.status(err.status || 500).send({ error: err });
+  res.send(err)
 })
 
 // serves page
@@ -53,5 +53,4 @@ app.delete('/api/customers/:id', (req, res ,next) => {
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`port of call: ${port}`));
 
-db.sync()
-  .then(() => db.seed())
+db.sync().then(() => db.seed())
