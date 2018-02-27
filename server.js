@@ -17,10 +17,6 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use((err, req, res, next) => {
-  res.send(err)
-})
-
 // serves page
 app.get('/', (req, res, next) => {
   res.sendFile(path.join(__dirname, './views/index.html'))
@@ -48,6 +44,11 @@ app.delete('/api/customers/:id', (req, res ,next) => {
       res.json(customer)
     })
     .catch(next)
+})
+
+app.use((err, req, res, next) => {
+  res.status(err.status || 500).send({ err })
+  next()
 })
 
 const port = process.env.PORT || 3000;

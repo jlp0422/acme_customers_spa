@@ -37,8 +37,13 @@ const deleteCustomer = (customer) => {
 
 const checkForError = (response) => {
   if (!response.ok) {
-    newMessage.innerText = 'Please try again. All emails must be valid and unique.'
-    emailInput.value = ''
+    return response.json()
+      .then(res => {
+        console.log(res.err.errors[0])
+        newMessage.innerText = res.err.errors[0].message
+        throw Error(response.error)
+        return;
+      })
   }
   return response
 }
