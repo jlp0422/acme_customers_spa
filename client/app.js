@@ -23,8 +23,10 @@ const createCustomer = (customer) => {
   emailInput.value = ''
   // remove button click event
   removeButton.addEventListener('click', () => {
-    deleteCustomer(customer)
-    newCustomer.remove()
+    if (confirm('Are you sure?')) {
+      deleteCustomer(customer)
+      newCustomer.remove()
+    }
   })
 }
 
